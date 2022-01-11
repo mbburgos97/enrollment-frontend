@@ -1,0 +1,32 @@
+.logo-wrapper {
+  display: flex;
+  flex-direction: row;
+  height: 10vmin;
+  background-color: white;
+  padding: 20px;
+}
+  
+.navbar-title {
+  margin: 0;
+  top: 50%;
+  width: 80%;
+}
+
+.logo {
+  margin-right: 10px;
+  height: 10vmin;
+}
+
+.button-bar {
+  display: flex;
+  flex-direction: row;
+}
+
+.button-text {
+  margin-left: 4vh;
+}
+
+.button-text:hover {
+  font-weight: bolder;
+  cursor: pointer;
+}
