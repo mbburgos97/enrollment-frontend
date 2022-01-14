@@ -1,10 +1,11 @@
 import React from 'react';
-import './App.css';
-import { NavBar } from './NavBar';
+import './LandingPage.css';
+import './Common.css';
+import { NavBar } from '../components/NavBar';
 
 function App() {
   return (
-    <div className="app">
+    <div className="page">
       <NavBar></NavBar>
       <div className="title-wrapper">
         <p className="subtitle">Sample Elementary</p>
