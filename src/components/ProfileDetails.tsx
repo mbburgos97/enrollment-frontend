@@ -1,11 +1,9 @@
 import React from "react";
 import "./ProfileDetails.css";
 
-
 interface Props {
-    student: Student;
+    student: IStudent;
 }
-
 
 export const ProfileDetails: React.FC<Props> = ({student}) => {
     return (

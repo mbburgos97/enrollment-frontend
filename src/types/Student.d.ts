@@ -1,4 +1,4 @@
-interface Student {
+interface IStudent {
     student_id: string;
     first_name: string;
     middle_name: string;
