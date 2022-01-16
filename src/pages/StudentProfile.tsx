@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { ImageProfile } from "../components/ImageProfile";
 import { ProfileDetails } from "../components/ProfileDetails";
-import "./StudentProfile.css";
-import "./Common.css";
 import { useParams } from "react-router-dom";
 import { StudentService } from "../services/StudentService";
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
 
 const studentInitialData: IStudent = {
     student_id: "",
@@ -14,7 +14,15 @@ const studentInitialData: IStudent = {
     profile_image: ""
 }
 
+const useStyles = makeStyles({
+  container: {
+    padding: "5vh",
+  },
+});
+
 export const StudentProfile: React.FC<{}> = () => {
+    const classes = useStyles();
+
     const params = useParams();
     const student_id = '' + params.student_id;
 
@@ -33,11 +41,11 @@ export const StudentProfile: React.FC<{}> = () => {
     }, [student_id]);
 
     return (    
-    <div className="content">
-        <ImageProfile profile_image={student.profile_image} 
-        full_name={student.last_name + ", " + student.first_name + " " + student.middle_name[0]}/>
-        <ProfileDetails student={student} />
-    </div>
+        <Grid container className={classes.container}>
+            <ImageProfile profile_image={student.profile_image} 
+            full_name={student.last_name + ", " + student.first_name + " " + student.middle_name[0]}/>
+            <ProfileDetails student={student} />
+        </Grid>
     );
 }
 

@@ -1,17 +1,37 @@
 import React from "react";
-import './ImageProfile.css';
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 
 interface Props {
     profile_image: string;
     full_name: string;
 }
 
+const useStyles = makeStyles({
+    container: {
+        textAlign: "center"
+    },
+    avatar: {
+        maxHeight: "70%",
+        maxWidth: "70%",
+        borderRadius: "50%",
+        margin: "2vh 0",
+    },
+    name: {
+        marginTop: 0,
+    }
+})
+
+
 export const ImageProfile: React.FC<Props> = ({profile_image, full_name}) => {
+    const classes = useStyles();
+
     return (
-        <div className="profile-wrapper">
-            <h2>{full_name}.</h2>
-            <img className="profile-image" src={profile_image} alt="profile_picture.png" />
-            <button>Upload Photo</button>
-        </div>
+        <Grid item xs={3} className={classes.container}>
+            <h2 className={classes.name}>{full_name}.</h2>
+            <img className={classes.avatar} src={profile_image} alt="profile_photo.png" />
+            <Button variant="contained" color="primary">Upload Photo</Button>
+        </Grid>
     );
 }
