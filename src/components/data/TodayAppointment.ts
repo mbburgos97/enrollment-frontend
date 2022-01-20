@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { appointments } from './appointment';
+import { Appointments } from './Appointment';
 
 const currentDate = moment();
 let date = currentDate.date();
@@ -21,7 +21,7 @@ const makeTodayAppointment = (startDate: Date, endDate: Date) => {
   };
 };
 
-export default appointments.map(({ startDate, endDate, ...restArgs }) => {
+export default Appointments.map(({ startDate, endDate, ...restArgs }) => {
   const result = {
     ...makeTodayAppointment(startDate, endDate),
     ...restArgs,

@@ -1,4 +1,4 @@
-export const appointments = [
+export const Appointments = [
     {
       title: 'English PM-1',
       startDate: new Date(2022, 1, 3, 9, 35),

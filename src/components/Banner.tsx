@@ -12,6 +12,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     button: {
         marginLeft: theme.spacing(2),
+        color: "white",
+        '&:hover': {
+          fontWeight: "bolder",  
+          backgroundColor: "black"
+        },
     },
     logo: {
         height: "7vh",
@@ -36,7 +41,9 @@ export const Banner = () => {
                 Sample Elementary School
               </Typography>
               <Button className={classes.button} color="inherit">Login</Button>
-              <Button className={classes.button} color="inherit">Sign up</Button>
+              <Link to="/signup" style={{textDecoration: 'none'}}>
+                <Button className={classes.button} color="inherit">Sign up</Button>
+              </Link>
             </Toolbar>
           </AppBar>
         </div>

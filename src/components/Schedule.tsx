@@ -5,8 +5,7 @@ import {
   WeekView,
   Appointments,
 } from '@devexpress/dx-react-scheduler-material-ui';
-
-import appointments from "../components/data/today-appointment"
+import appointments from "./data/TodayAppointment"
 
 export const Schedule: React.FC<{}> = () => {
     return(
