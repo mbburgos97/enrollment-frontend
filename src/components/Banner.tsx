@@ -40,7 +40,9 @@ export const Banner = () => {
               <Typography variant="h5" className={classes.title}>
                 Sample Elementary School
               </Typography>
-              <Button className={classes.button} color="inherit">Login</Button>
+              <Link to="/login" style={{textDecoration: 'none'}}>
+                <Button className={classes.button} color="inherit">Login</Button>
+              </Link>
               <Link to="/signup" style={{textDecoration: 'none'}}>
                 <Button className={classes.button} color="inherit">Sign up</Button>
               </Link>
