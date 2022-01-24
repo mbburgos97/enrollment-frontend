@@ -10,7 +10,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 
 interface Props {
-    student: IStudent;
+    student: IProfile;
 }
 
 const useStyles = makeStyles({
@@ -42,7 +42,7 @@ export const ProfileDetails: React.FC<Props> = ({student}) => {
                 </ListItem>
                 <ListItem>
                     <ListItemText className={classes.label}>Student ID: </ListItemText>
-                    <ListItemText className={classes.value}>{student.student_id}</ListItemText>
+                    <ListItemText className={classes.value}>{student.id}</ListItemText>
                     <ListItemSecondaryAction>
                         <IconButton edge="end" aria-label="delete">
                             <EditIcon />

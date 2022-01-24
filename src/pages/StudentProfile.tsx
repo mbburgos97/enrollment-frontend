@@ -1,18 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { ImageProfile } from "../components/ImageProfile";
 import { ProfileDetails } from "../components/ProfileDetails";
 import { useParams } from "react-router-dom";
-import { StudentService } from "../services/StudentService";
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-
-const studentInitialData: IStudent = {
-    student_id: "",
-    first_name: "",
-    middle_name: "",
-    last_name: "",
-    profile_image: ""
-}
+import { useDispatch, useSelector } from "react-redux";
+import { profileSelector, setProfileThunk } from "../slices/profileSlice" 
 
 const useStyles = makeStyles({
   container: {
@@ -23,29 +16,24 @@ const useStyles = makeStyles({
 export const StudentProfile: React.FC<{}> = () => {
     const classes = useStyles();
 
-    const params = useParams();
-    const student_id = '' + params.student_id;
+    const profile = useSelector(profileSelector);
 
-    const [student, setStudent] = useState<IStudent>(studentInitialData); 
+    const dispatch = useDispatch();
+    const params = useParams();
+
+    const setProfile = useCallback(setProfileThunk(dispatch), [dispatch]) ;
 
     useEffect(() => {
-        const fetchData = async() => {
-            try {
-                const {data: response } = await StudentService.getStudent(student_id);
-                setStudent(response);
-            } catch(error) {
-                console.log(error);
-            }
+        if (params.id) {
+          setProfile(params.id)
         }
-        fetchData();
-    }, [student_id]);
+    }, [params.id]);
 
     return (    
         <Grid container className={classes.container}>
-            <ImageProfile profile_image={student.profile_image} 
-            full_name={student.last_name + ", " + student.first_name + " " + student.middle_name[0]}/>
-            <ProfileDetails student={student} />
+            <ImageProfile profile_image={profile.profile_image} 
+            full_name={profile.last_name + ", " + profile.first_name + " " + profile.middle_name[0]}/>
+            <ProfileDetails student={profile} />
         </Grid>
     );
 }
-

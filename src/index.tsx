@@ -3,12 +3,15 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './pages/App';
+import { CustomProvider } from "./CustomProvider"
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <CustomProvider >
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </CustomProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
