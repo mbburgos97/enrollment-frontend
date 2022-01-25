@@ -10,7 +10,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 
 interface Props {
-    student: IProfile;
+    profile: IProfile;
 }
 
 const useStyles = makeStyles({
@@ -30,7 +30,7 @@ const useStyles = makeStyles({
 });
 
 
-export const ProfileDetails: React.FC<Props> = ({student}) => {
+export const ProfileDetails: React.FC<Props> = ({profile}) => {
     const classes = useStyles();
 
     return (
@@ -42,7 +42,7 @@ export const ProfileDetails: React.FC<Props> = ({student}) => {
                 </ListItem>
                 <ListItem>
                     <ListItemText className={classes.label}>Student ID: </ListItemText>
-                    <ListItemText className={classes.value}>{student.id}</ListItemText>
+                    <ListItemText className={classes.value}>{profile.id}</ListItemText>
                     <ListItemSecondaryAction>
                         <IconButton edge="end" aria-label="delete">
                             <EditIcon />
@@ -51,7 +51,7 @@ export const ProfileDetails: React.FC<Props> = ({student}) => {
                 </ListItem>
                 <ListItem>
                     <ListItemText className={classes.label}>First Name: </ListItemText>
-                    <ListItemText className={classes.value}>{student.first_name}</ListItemText>
+                    <ListItemText className={classes.value}>{profile.first_name}</ListItemText>
                     <ListItemSecondaryAction>
                         <IconButton edge="end" aria-label="delete">
                             <EditIcon />
@@ -60,7 +60,7 @@ export const ProfileDetails: React.FC<Props> = ({student}) => {
                 </ListItem>
                 <ListItem>
                     <ListItemText className={classes.label}>Middle Name: </ListItemText>
-                    <ListItemText className={classes.value}>{student.middle_name}</ListItemText>
+                    <ListItemText className={classes.value}>{profile.middle_name}</ListItemText>
                     <ListItemSecondaryAction>
                         <IconButton edge="end" aria-label="delete">
                             <EditIcon />
@@ -69,7 +69,7 @@ export const ProfileDetails: React.FC<Props> = ({student}) => {
                 </ListItem>
                 <ListItem>
                     <ListItemText className={classes.label}>Last Name: </ListItemText>
-                    <ListItemText className={classes.value}>{student.last_name}</ListItemText>
+                    <ListItemText className={classes.value}>{profile.last_name}</ListItemText>
                     <ListItemSecondaryAction>
                         <IconButton edge="end" aria-label="delete">
                             <EditIcon />

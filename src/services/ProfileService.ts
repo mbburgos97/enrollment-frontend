@@ -5,6 +5,12 @@ const getStudent = async (id: string) => {
     return data;
 }
 
-export const StudentService = {
+const getTeacher = async (id: string) => {
+    const {data} = await http.get<IProfile>(`/teacher/${id}`);
+    return data;
+}
+
+export const ProfileService = {
     getStudent,
+    getTeacher
 };
