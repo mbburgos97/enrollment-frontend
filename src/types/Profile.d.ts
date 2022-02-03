@@ -4,4 +4,9 @@ interface IProfile {
     middle_name: string;
     last_name: string;
     profile_image: string;
+    password?: string;
+    email: string;
+    username: string;
+    contact_number: string;
+    nickname: string;
 }

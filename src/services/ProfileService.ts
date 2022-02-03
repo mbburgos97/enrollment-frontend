@@ -10,7 +10,17 @@ const getTeacher = async (id: string) => {
     return data;
 }
 
+const createStudent = async (profile: IProfile) => {
+    const {data} = await http.post<IProfile>('/student', profile);
+}
+
+const createTeacher = async (profile: IProfile) => {
+    const {data} = await http.post<IProfile>('/teacher', profile);
+}
+
 export const ProfileService = {
     getStudent,
-    getTeacher
+    getTeacher,
+    createStudent,
+    createTeacher,
 };

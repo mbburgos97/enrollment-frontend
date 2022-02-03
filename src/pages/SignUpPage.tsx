@@ -7,16 +7,17 @@ import Grid from "@material-ui/core/Grid";
 import Typography from '@material-ui/core/Typography';
 import { Link } from "react-router-dom";
 import InputAdornment from '@material-ui/core/InputAdornment';
-import LockIcon from '@material-ui/icons/Lock';
 import IconButton from '@material-ui/core/IconButton';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import { ProfileService } from '../services/ProfileService';
 
 interface State {
     password: string;
     showPassword: boolean;
     confirmPassword: string;
     showConfirmPassword: boolean;
+    profile: IProfile;
 }
 
 const useStyle = makeStyles({
@@ -44,6 +45,18 @@ export const SignUpPage: React.FC<{}> = () => {
         showPassword: false,
         confirmPassword: '',
         showConfirmPassword: false,
+        profile: {
+            id: '',
+            first_name: '',
+            middle_name: '',
+            last_name: '',
+            profile_image: '',
+            password: '',
+            email: '',
+            username: '',
+            contact_number: '',
+            nickname: ''
+        }
     });
 
     const handleClickShowPassword = () => {
@@ -62,62 +75,95 @@ export const SignUpPage: React.FC<{}> = () => {
         setValues({ ...values, [prop]: event.target.value });
     };
 
+    const handleChangeProfileField = (prop: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
+        let profile = {... values.profile, [prop]: event.target.value };
+        setValues({ ...values, profile: profile });
+    };
+
+    const handleSubmit = (event: React.SyntheticEvent) => {
+        event.preventDefault();
+        let profile = {... values.profile, password: values.password };
+        setValues({ ...values, profile: profile });
+        ProfileService.createStudent(values.profile);
+    } 
+
     return (
         <Grid container>
             <Grid item xs={1} />
             <Grid item xs={10}>
                 <Paper className={classes.paper} variant="outlined" >
                     <h2>Create Account</h2>
-                    <form autoComplete="off" className={classes.form}>
+                    <form autoComplete="off" className={classes.form} onSubmit={handleSubmit}>
+                        <OutlinedInput
+                            placeholder="Student Id"
+                            margin="dense"
+                            fullWidth
+                            className={classes.textField}
+                            value={values.profile.id}
+                            onChange={handleChangeProfileField('id')}
+                            required
+                        />
                         <div style={{width:"40%"}}>
                             <OutlinedInput
-                                id="first-name"
                                 placeholder="First Name"
                                 fullWidth
                                 margin="dense"
                                 required
                                 className={classes.textField}
+                                value={values.profile.first_name}
+                                onChange={handleChangeProfileField('first_name')}
                             />
                         </div>
                         <div style={{width:"19%", padding: "0 .5%"}}>
                             <OutlinedInput
-                                id="middle-name"
                                 fullWidth
                                 placeholder="Middle Name"
                                 margin="dense"
                                 required
                                 className={classes.textField}
+                                value={values.profile.middle_name}
+                                onChange={handleChangeProfileField('middle_name')}
                             />
                         </div>
                         <div style={{width:"40%"}}>
-                            <OutlinedInput
-                                id="last-name"        
+                            <OutlinedInput 
                                 placeholder="Last Name" 
                                 fullWidth
                                 margin="dense"
                                 required
                                 className={classes.textField}
+                                value={values.profile.last_name}
+                                onChange={handleChangeProfileField('last_name')}
                             />
                         </div>
-                        
                         <OutlinedInput
-                            id="email"
                             placeholder="Email"
                             margin="dense"
                             fullWidth
                             className={classes.textField}
+                            value={values.profile.email}
+                            onChange={handleChangeProfileField('email')}
                             required
                         />
                         <OutlinedInput
-                            id="username"
+                            placeholder="Contact Number"
+                            margin="dense"
+                            fullWidth
+                            className={classes.textField}
+                            value={values.profile.contact_number}
+                            onChange={handleChangeProfileField('contact_number')}
+                            required
+                        />
+                        <OutlinedInput
                             placeholder="Username"
                             margin="dense"
                             fullWidth
                             className={classes.textField}
+                            value={values.profile.username}
+                            onChange={handleChangeProfileField('username')}
                             required
                         />
                         <OutlinedInput
-                            id="password"
                             type={values.showPassword ? 'text' : 'password'}
                             value={values.password}
                             onChange={handleChange('password')}
@@ -138,7 +184,6 @@ export const SignUpPage: React.FC<{}> = () => {
                             }
                         />
                         <OutlinedInput
-                            id="confirm-password"
                             type={values.showConfirmPassword ? 'text' : 'password'}
                             value={values.confirmPassword}
                             onChange={handleChange('confirmPassword')}
@@ -146,6 +191,7 @@ export const SignUpPage: React.FC<{}> = () => {
                             className={classes.textField}
                             margin="dense"
                             placeholder="Confirm Password"
+                            error={values.password!==values.confirmPassword}
                             endAdornment={
                                 <InputAdornment position="end">
                                     <IconButton
@@ -159,8 +205,8 @@ export const SignUpPage: React.FC<{}> = () => {
                             }
                         />
                         
-                        <Grid container justify="center" style={{marginTop: "2vh"}}>
-                            <Button type="submit" variant="contained" color="primary">
+                        <Grid container justifyContent="center" style={{marginTop: "2vh"}}>
+                            <Button type="submit" variant="contained" color="primary" disabled={values.password!==values.confirmPassword}>
                                 Create Account
                             </Button>
                         </Grid>

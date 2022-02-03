@@ -8,7 +8,11 @@ const initialState: IProfile = {
     first_name: '',
     middle_name: '',
     last_name: '',
-    profile_image: ''
+    profile_image: '',
+    email: '',
+    username: '',
+    contact_number: '',
+    nickname: ''
 }
 
 export const profileSlice = createSlice({
