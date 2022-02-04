@@ -11,11 +11,14 @@ import IconButton from '@material-ui/core/IconButton';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { ProfileService } from '../services/ProfileService';
+import Switch from '@material-ui/core/Switch';
 
 interface State {
     password: string;
+    isTeacher: boolean;
     showPassword: boolean;
     confirmPassword: string;
+    idPlaceholder: string;
     showConfirmPassword: boolean;
     profile: IProfile;
 }
@@ -42,9 +45,11 @@ export const SignUpPage: React.FC<{}> = () => {
 
     const [values, setValues] = React.useState<State>({
         password: '',
+        isTeacher: false,
         showPassword: false,
         confirmPassword: '',
         showConfirmPassword: false,
+        idPlaceholder: 'Student ID',
         profile: {
             id: '',
             first_name: '',
@@ -80,11 +85,22 @@ export const SignUpPage: React.FC<{}> = () => {
         setValues({ ...values, profile: profile });
     };
 
+    const handleChangeProfile = (event: React.ChangeEvent<HTMLInputElement>) => {
+        let idPlaceholder = 'Student ID';
+        if (event.target.checked) idPlaceholder = 'Teacher ID';
+        setValues({ ...values, isTeacher: event.target.checked, idPlaceholder: idPlaceholder });
+    }
+
     const handleSubmit = (event: React.SyntheticEvent) => {
         event.preventDefault();
         let profile = {... values.profile, password: values.password };
         setValues({ ...values, profile: profile });
-        ProfileService.createStudent(values.profile);
+        console.log(values.isTeacher)
+        if (values.isTeacher) {
+            ProfileService.createTeacher(values.profile);
+        } else {
+            ProfileService.createStudent(values.profile);
+        }
     } 
 
     return (
@@ -92,10 +108,26 @@ export const SignUpPage: React.FC<{}> = () => {
             <Grid item xs={1} />
             <Grid item xs={10}>
                 <Paper className={classes.paper} variant="outlined" >
-                    <h2>Create Account</h2>
+                <Typography component="div">
+                <h2 style={{marginBottom: 0}}>Create Account</h2>
+                    <Grid component="label" container alignItems='center' spacing={1}>
+                        <Grid item xs={9}></Grid>
+                    <Grid item xs={1}>Student</Grid>
+                    <Grid item>
+                        <Switch
+                            color="default"
+                            checked={values.isTeacher}
+                            onChange={handleChangeProfile}
+                            inputProps={{ 'aria-label': 'checkbox with default color' }}
+                        />
+                    </Grid>
+                    <Grid item>Teacher</Grid>
+                    </Grid>
+                </Typography>
+                    
                     <form autoComplete="off" className={classes.form} onSubmit={handleSubmit}>
                         <OutlinedInput
-                            placeholder="Student Id"
+                            placeholder={values.idPlaceholder}
                             margin="dense"
                             fullWidth
                             className={classes.textField}

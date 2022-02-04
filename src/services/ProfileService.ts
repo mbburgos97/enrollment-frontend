@@ -15,6 +15,7 @@ const createStudent = async (profile: IProfile) => {
 }
 
 const createTeacher = async (profile: IProfile) => {
+    console.log(profile)
     const {data} = await http.post<IProfile>('/teacher', profile);
 }
 
