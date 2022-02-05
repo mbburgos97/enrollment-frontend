@@ -5,6 +5,7 @@ import { Profile } from "./Profile";
 import { HomePage } from "./HomePage";
 import { SignUpPage } from "./SignUpPage";
 import { LoginPage } from "./LoginPage";
+import { NotFoundPage } from "./NotFoundPage"
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/home" element={<HomePage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
   );
