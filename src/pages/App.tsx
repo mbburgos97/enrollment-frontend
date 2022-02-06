@@ -13,8 +13,8 @@ function App() {
       <Banner></Banner>
       <Routes>
         <Route path="/" element={<EntryPage />} />
-        <Route path="/student/:id" element={<Profile />} />
-        <Route path="/teacher/:id" element={<Profile />} />
+        <Route path="/student/:id" element={<Profile type="student" />} />
+        <Route path="/teacher/:id" element={<Profile type="teacher" />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/login" element={<LoginPage />} />

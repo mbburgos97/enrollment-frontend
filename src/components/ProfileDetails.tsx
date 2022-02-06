@@ -11,6 +11,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 
 interface Props {
     profile: IProfile;
+    type: string;
 }
 
 const useStyles = makeStyles({
@@ -30,8 +31,11 @@ const useStyles = makeStyles({
 });
 
 
-export const ProfileDetails: React.FC<Props> = ({profile}) => {
+export const ProfileDetails: React.FC<Props> = ({profile, type}) => {
     const classes = useStyles();
+    let label;
+    if (type === "student") label = "Student ID: ";
+    else if (type === "teacher") label = "Teacher ID: ";
 
     return (
         <Grid container className={classes.container} item xs={8} spacing={2}>
@@ -41,7 +45,7 @@ export const ProfileDetails: React.FC<Props> = ({profile}) => {
                     <Typography variant="h5" >Account Details:</Typography>
                 </ListItem>
                 <ListItem>
-                    <ListItemText className={classes.label}>Student ID: </ListItemText>
+                    <ListItemText className={classes.label}>{label}</ListItemText>
                     <ListItemText className={classes.value}>{profile.id}</ListItemText>
                     <ListItemSecondaryAction>
                         <IconButton edge="end" aria-label="delete">
@@ -70,6 +74,47 @@ export const ProfileDetails: React.FC<Props> = ({profile}) => {
                 <ListItem>
                     <ListItemText className={classes.label}>Last Name: </ListItemText>
                     <ListItemText className={classes.value}>{profile.last_name}</ListItemText>
+                    <ListItemSecondaryAction>
+                        <IconButton edge="end" aria-label="delete">
+                            <EditIcon />
+                        </IconButton>
+                    </ListItemSecondaryAction>
+                </ListItem>
+                <ListItem>
+                    <ListItemText className={classes.label}>Email: </ListItemText>
+                    <ListItemText className={classes.value}>{profile.email}</ListItemText>
+                    <ListItemSecondaryAction>
+                        <IconButton edge="end" aria-label="delete">
+                            <EditIcon />
+                        </IconButton>
+                    </ListItemSecondaryAction>
+                </ListItem>
+                <ListItem>
+                    <ListItemText className={classes.label}>Contact Number: </ListItemText>
+                    <ListItemText className={classes.value}>{profile.contact_number}</ListItemText>
+                    <ListItemSecondaryAction>
+                        <IconButton edge="end" aria-label="delete">
+                            <EditIcon />
+                        </IconButton>
+                    </ListItemSecondaryAction>
+                </ListItem>
+                <ListItem>
+                    <ListItemText className={classes.label}>Nickname: </ListItemText>
+                    <ListItemText className={classes.value}>{profile.nickname}</ListItemText>
+                    <ListItemSecondaryAction>
+                        <IconButton edge="end" aria-label="delete">
+                            <EditIcon />
+                        </IconButton>
+                    </ListItemSecondaryAction>
+                </ListItem>
+                <ListItem>
+                    <ListItemText className={classes.label}>Username: </ListItemText>
+                    <ListItemText className={classes.value}>{profile.username}</ListItemText>
+                    <ListItemSecondaryAction />
+                </ListItem>
+                <ListItem>
+                    <ListItemText className={classes.label}>Password: </ListItemText>
+                    <ListItemText className={classes.value}>***************</ListItemText>
                     <ListItemSecondaryAction>
                         <IconButton edge="end" aria-label="delete">
                             <EditIcon />

@@ -6,6 +6,11 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from "react-redux";
 import { profileSelector, setProfileThunk } from "../slices/profileSlice" 
+import { type } from "os";
+
+interface Props {
+  type: string;
+}
 
 const useStyles = makeStyles({
   container: {
@@ -13,7 +18,7 @@ const useStyles = makeStyles({
   },
 });
 
-export const Profile: React.FC<{}> = () => {
+export const Profile: React.FC<Props> = ({type}) => {
     const classes = useStyles();
 
     const profile = useSelector(profileSelector);
@@ -34,7 +39,7 @@ export const Profile: React.FC<{}> = () => {
         <Grid container className={classes.container}>
             <ImageProfile profile_image={profile.profile_image} 
             full_name={profile.last_name + ", " + profile.first_name + " " + profile.middle_name[0]}/>
-            <ProfileDetails profile={profile} />
+            <ProfileDetails profile={profile} type={type} />
         </Grid>
     );
 }

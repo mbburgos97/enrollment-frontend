@@ -30,7 +30,7 @@ export const ImageProfile: React.FC<Props> = ({profile_image, full_name}) => {
     return (
         <Grid item xs={3} className={classes.container}>
             <h2 className={classes.name}>{full_name}.</h2>
-            <img className={classes.avatar} src={profile_image} alt="profile_photo.png" />
+            <div><img className={classes.avatar} src={profile_image} alt="profile_photo.png" /></div>
             <Button variant="contained" color="primary">Upload Photo</Button>
         </Grid>
     );
