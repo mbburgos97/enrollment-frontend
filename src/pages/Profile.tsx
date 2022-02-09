@@ -5,7 +5,7 @@ import { useParams, useLocation } from "react-router-dom";
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from "react-redux";
-import { profileSelector, setProfileThunk } from "../slices/profileSlice" 
+import { profileSelector, setProfileThunk, patchProfileThunk } from "../slices/profileSlice" 
 import { type } from "os";
 
 interface Props {
@@ -29,6 +29,8 @@ export const Profile: React.FC<Props> = ({type}) => {
     
     const setProfile = useCallback(setProfileThunk(dispatch), [dispatch]) ;
     
+    const patchProfile = useCallback(patchProfileThunk(dispatch), [dispatch]);
+
     useEffect(() => {
         if (params.id) {
           setProfile(params.id, location.pathname.split('/')[1])
@@ -39,7 +41,7 @@ export const Profile: React.FC<Props> = ({type}) => {
         <Grid container className={classes.container}>
             <ImageProfile profile_image={profile.profile_image} 
             full_name={profile.last_name + ", " + profile.first_name + " " + profile.middle_name[0]}/>
-            <ProfileDetails profile={profile} type={type} />
+            <ProfileDetails profile={profile} type={type} patchProfile={patchProfile} />
         </Grid>
     );
 }

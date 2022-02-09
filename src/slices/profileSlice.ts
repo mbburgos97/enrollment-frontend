@@ -19,7 +19,8 @@ export const profileSlice = createSlice({
     name: 'profile',
     initialState,
     reducers: {
-        setProfile: (state, action: PayloadAction<IProfile>) => action.payload
+        setProfile: (state, action: PayloadAction<IProfile>) => action.payload,
+        patchProfile: (state, action: PayloadAction<IProfile>) => action.payload
     }
 })
 
@@ -38,7 +39,22 @@ export const setProfileThunk = (dispatch: Dispatch<any>) => {
     }
 }
 
-export const { setProfile } = profileSlice.actions;
+export const patchProfileThunk = (dispatch: Dispatch<any>) => {
+    return async (id: string, type: string, profile: IPatchProfile) => {
+        switch(type) {
+            case "student": 
+                const student = await ProfileService.patchStudent(id, profile);
+                dispatch(setProfile(student))
+                break;
+            case "teacher": 
+                const teacher = await ProfileService.patchTeacher(id, profile);
+                dispatch(setProfile(teacher))
+                break;
+        }
+    }
+}
+
+export const { setProfile, patchProfile } = profileSlice.actions;
 
 export const profileSelector = (state: RootState) => state.profile;
 

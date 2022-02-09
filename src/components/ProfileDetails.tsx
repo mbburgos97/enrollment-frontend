@@ -12,6 +12,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 interface Props {
     profile: IProfile;
     type: string;
+    patchProfile: (id: string, type: string, profile: IPatchProfile) => void;
 }
 
 const useStyles = makeStyles({
@@ -31,7 +32,7 @@ const useStyles = makeStyles({
 });
 
 
-export const ProfileDetails: React.FC<Props> = ({profile, type}) => {
+export const ProfileDetails: React.FC<Props> = ({ profile, type, patchProfile }) => {
     const classes = useStyles();
     let label;
     if (type === "student") label = "Student ID: ";
@@ -48,7 +49,7 @@ export const ProfileDetails: React.FC<Props> = ({profile, type}) => {
                     <ListItemText className={classes.label}>{label}</ListItemText>
                     <ListItemText className={classes.value}>{profile.id}</ListItemText>
                     <ListItemSecondaryAction>
-                        <IconButton edge="end" aria-label="delete">
+                        <IconButton edge="end" aria-label="delete" onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => patchProfile(profile.id, type, {email: "change2@gmail.com"})}>
                             <EditIcon />
                         </IconButton>
                     </ListItemSecondaryAction>
