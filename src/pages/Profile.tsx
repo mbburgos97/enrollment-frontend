@@ -6,7 +6,6 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from "react-redux";
 import { profileSelector, setProfileThunk, patchProfileThunk } from "../slices/profileSlice" 
-import { type } from "os";
 
 interface Props {
   type: string;
@@ -27,7 +26,7 @@ export const Profile: React.FC<Props> = ({type}) => {
     const params = useParams();
     const location = useLocation();
     
-    const setProfile = useCallback(setProfileThunk(dispatch), [dispatch]) ;
+    const setProfile = useCallback(setProfileThunk(dispatch), [dispatch]);
     
     const patchProfile = useCallback(patchProfileThunk(dispatch), [dispatch]);
 

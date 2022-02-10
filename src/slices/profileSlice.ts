@@ -15,7 +15,7 @@ const initialState: IProfile = {
     nickname: ''
 }
 
-export const profileSlice = createSlice({
+const profileSlice = createSlice({
     name: 'profile',
     initialState,
     reducers: {
